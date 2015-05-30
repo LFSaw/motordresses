@@ -18,7 +18,7 @@ void runMotor(int where, int which, int dirct){
 	}
 }
 
-void step(int where, int which){
+int step(int where, int which){
 	int idx;
 	idx = timeIdx[which][where];
 	
@@ -37,15 +37,18 @@ void step(int where, int which){
 			
 			if (timeIdx[which][where] > 4){
           		enableCounter = 10;
-                #ifndef ALLMOTORS
-                notMoving     = true; 
-                #endif
 				timeIdx[which][where] = -1;
 
 				// stop motor
 				runMotor(where, which, -1);
+                #ifdef ALLMOTORS
+                return 1;
+                # else
+                notMoving     = true; 
+                #endif
 			}
 		}
 		
 	}
+	return 0;
 }

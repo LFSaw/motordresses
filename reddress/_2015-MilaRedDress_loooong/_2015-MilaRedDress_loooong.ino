@@ -117,22 +117,22 @@ void loop() {
 		  	}
 		}
 
+		#ifdef ALLMOTORS
+		static int inactiveCounter;
+		inactiveCounter = 0;
+		#endif
+
 		for (int i = 0; i<2; i++) {
 			for (int j = 0; j<2; j++) {
+				#ifdef ALLMOTORS
+				inactiveCounter = inactiveCounter + step(i, j);
+				#else
 				step(i, j);
+				#endif
 			}
 		}
-
 
 		#ifdef ALLMOTORS
-		int inactiveCounter = 0;
-		for (int i = 0; i<2; i++) {
-			for (int j = 0; j<2; j++) {
-				if (timeIdx[i][j] > 4) {
-					inactiveCounter++;
-				}
-			}
-		}
 		if (inactiveCounter == 4) {
 			notMoving = true;
 		}
