@@ -37,7 +37,9 @@ void step(int where, int which){
 			
 			if (timeIdx[which][where] > 4){
           		enableCounter = 10;
+                #ifndef ALLMOTORS
                 notMoving     = true; 
+                #endif
 				timeIdx[which][where] = -1;
 
 				// stop motor

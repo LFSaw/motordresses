@@ -123,6 +123,20 @@ void loop() {
 			}
 		}
 
+
+		#ifdef ALLMOTORS
+		int inactiveCounter = 0;
+		for (int i = 0; i<2; i++) {
+			for (int j = 0; j<2; j++) {
+				if (timeIdx[i][j] > 4) {
+					inactiveCounter++
+				}
+			}
+		}
+		if (inactiveCounter == 4) {
+			notMoving = true;
+		}
+		#endif
 	}
 	
 	
